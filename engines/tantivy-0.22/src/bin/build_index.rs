@@ -13,7 +13,8 @@ fn main() {
 fn create_schema() -> Schema {
     let mut schema_builder = Schema::builder();
     schema_builder.add_text_field("id", STORED);
-    schema_builder.add_text_field("text", TEXT);
+    // TEXT | STORED: 既索引又存储原始文档内容
+    schema_builder.add_text_field("text", TEXT | STORED);
     schema_builder.build()
 }
 

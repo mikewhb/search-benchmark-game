@@ -10,6 +10,7 @@ engines/bluge-*/bin/
 engines/**/idx
 engines/**/idx-reordered
 engines/**/build
+engines/**/check.log
 **/target
 **/node_modules
 **/.readymade
