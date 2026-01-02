@@ -10,7 +10,7 @@ pip install -r engines/lancedb-tantivy/requirements.txt
 DataSize:
 original json file:
 ~/Code/search-benchmark-game 02:59:35]$ls -lrh *json
--rw-r--r--@ 1 mike  admin   922B Dec 31 18:10 test_corpus.json
+-rw-r--r--@ 1 mike  admin   7.6G Dec 31 17:30 corpus.json
 
 lancedb's size:
 ~/Code/search-benchmark-game/engines/lancedb-rust-fts/idx/wiki_articles.lance 03:09:31]$du -hd 1
