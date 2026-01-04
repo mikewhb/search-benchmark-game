@@ -94,7 +94,8 @@ async fn execute_count(table: &Table, query_str: &str, limit: usize) -> Result<u
     let query_result = table
         .query()
         .full_text_search(fts_query)
-        .select(ID_COLUMNS.clone())
+        .select([])
+        .with_row_id(True)
         .limit(limit)
         .execute()
         .await;

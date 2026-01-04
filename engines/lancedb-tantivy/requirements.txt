@@ -20,7 +20,7 @@ httpx==0.28.1
 idna==3.11
 lance-namespace==0.4.2
 lance-namespace-urllib3-client==0.4.2
-lancedb==0.26.0
+lancedb==0.26.1
 markdown-it-py==4.0.0
 mdurl==0.1.2
 multidict==6.7.0
