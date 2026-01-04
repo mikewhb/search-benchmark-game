@@ -94,8 +94,10 @@ async fn execute_count(table: &Table, query_str: &str, limit: usize) -> Result<u
     let query_result = table
         .query()
         .full_text_search(fts_query)
-        .select([])
-        .with_row_id(True)
+        .select(ID_COLUMNS.clone())
+        // .select(Select::columns(&["_score"]))  // 只选择 FTS 分数列
+        // .with_row_id()
+        // .fast_search()
         .limit(limit)
         .execute()
         .await;
@@ -124,6 +126,9 @@ async fn execute_top_n(table: &Table, query_str: &str, limit: usize) -> Result<(
         .query()
         .full_text_search(fts_query)
         .select(ID_COLUMNS.clone())
+        // .select(Select::columns(&["_score"]))  // 只选择 FTS 分数列
+        // .with_row_id()
+        // .fast_search()
         .limit(limit)
         .execute()
         .await;

@@ -150,18 +150,18 @@ if __name__ == "__main__":
             warmup_start = time.monotonic()
             warmup_iter = 0
             printProgressBar(0, prefix = 'Warmup:', suffix = 'Complete', length = 50)
-            while True:
-                warmup_iter += 1
-                query_count = 0
-                for _ in drive(queries_shuffled, search_client, command):
-                    query_count += 1
-                elapsed = time.monotonic() - warmup_start
-                progress = min(1, elapsed / WARMUP_TIME)
-                if DEBUG:
-                    print(f"\nWarmup iter {warmup_iter}: {query_count} queries, elapsed {elapsed:.1f}s/{WARMUP_TIME}s", flush=True)
-                printProgressBar(progress, prefix = 'Warmup:', suffix = 'Complete', length = 50)
-                if progress == 1:
-                    break
+            # while True:
+            #     warmup_iter += 1
+            #     query_count = 0
+            #     for _ in drive(queries_shuffled, search_client, command):
+            #         query_count += 1
+            #     elapsed = time.monotonic() - warmup_start
+            #     progress = min(1, elapsed / WARMUP_TIME)
+            #     if DEBUG:
+            #         print(f"\nWarmup iter {warmup_iter}: {query_count} queries, elapsed {elapsed:.1f}s/{WARMUP_TIME}s", flush=True)
+            #     printProgressBar(progress, prefix = 'Warmup:', suffix = 'Complete', length = 50)
+            #     if progress == 1:
+            #         break
             printProgressBar(0, prefix = 'Run:   ', suffix = 'Complete', length = 50)
             for i in range(NUM_ITER):
                 for (query, count, duration) in drive(queries_shuffled, search_client, command):
