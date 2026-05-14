@@ -1,0 +1,6 @@
+{
+  "dataset": "lance.main.search_benchmark_docs",
+  "doc_count": 2,
+  "table": "lance.main.search_benchmark_docs",
+  "text_column": "text"
+}

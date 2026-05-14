@@ -25,3 +25,4 @@ corpus.json
 engines/**/.project
 engines/**/.classpath
 engines/**/.settings
+engines/**/__pycache__

@@ -1,0 +1,6 @@
+[
+  "Runs against a TDSQL SQLEngine full-text standalone node in multimodal mode.",
+  "Uses DuckDB plus the lance-duckdb extension through the MySQL protocol.",
+  "Builds a Lance table and creates an inverted index on the text column.",
+  "COUNT commands are implemented by querying lance_fts with k equal to the indexed document count unless LANCE_BENCH_COUNT_K overrides it."
+]
