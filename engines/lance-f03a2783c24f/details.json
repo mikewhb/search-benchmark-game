@@ -1,0 +1,9 @@
+[
+  "Written in Rust. Path-depends lance-distributed-foyer @ f03a2783c24f.",
+  "A1 fair mode: one FTS partition (LANCE_FTS_NUM_SHARDS=1), current-thread Tokio, LANCE_FTS_SEARCH_CHUNK=1.",
+  "Tokenizer: simple, stem=false, stopwords=false, lowercase, ascii folding, with_position=true, block_size=128.",
+  "BM25 k1=1.2 b=0.75 (hardcoded in Lance). Lucene bench uses 0.9/0.4.",
+  "Search projects no user columns (row id only) and uses fast_search so it does not take stored text.",
+  "COUNT / TOP_*_COUNT score every matching document (no dedicated count collector).",
+  "Index and corpus live on tmpfs under /dev/shm/sbg."
+]

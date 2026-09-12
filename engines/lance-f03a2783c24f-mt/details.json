@@ -1,0 +1,7 @@
+[
+  "Written in Rust. Same binary as lance-f03a2783c24f, product-default query shape.",
+  "A2: default FTS partitions (LANCE_FTS_NUM_SHARDS / PARTITION_SIZE unset), multi-thread Tokio, default LANCE_FTS_SEARCH_CHUNK=16.",
+  "Tokenizer and BM25 match A1. Search still does not take stored text.",
+  "COUNT / TOP_*_COUNT score every matching document.",
+  "Index and corpus live on tmpfs under /dev/shm/sbg."
+]

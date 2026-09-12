@@ -1,14 +1,13 @@
-CORPUS := $(shell pwd)/corpus.json
+SBG_ROOT ?= /dev/shm/sbg
+CORPUS ?= $(SBG_ROOT)/corpus.json
+JAVA_HOME ?= /tmp/jdk-21.0.8+9
+PATH := $(JAVA_HOME)/bin:$(PATH)
 export
 
-WIKI_SRC = "https://www.dropbox.com/s/wwnfnu441w1ec9p/wiki-articles.json.bz2"
+WIKI_SRC = "https://www.dropbox.com/s/wwnfnu441w1ec9p/wiki-articles.json.bz2?dl=1"
 
-COMMANDS ?=  TOP_100_COUNT TOP_100 COUNT
-
-# ENGINES ?= tantivy-0.13 lucene-8.4.0 pisa-0.8.2 rucene-0.1 bleve-0.8.0-scorch rucene-0.1 tantivy-0.11 tantivy-0.14 tantivy-0.15 tantivy-0.16 tantivy-0.17 tantivy-0.18 tantivy-0.19
-# ENGINES ?= tantivy-0.16 lucene-8.10.1 pisa-0.8.2 bleve-0.8.0-scorch bluge-0.2.2 rucene-0.1
-# ENGINES ?= tantivy-0.16 tantivy-0.17 tantivy-0.18 tantivy-0.19
-ENGINES ?= tantivy-0.22 tantivy-0.24 tantivy-0.25 tantivy-main lucene-10.3.0 lucene-10.3.0-bp
+COMMANDS ?= TOP_10 TOP_100 COUNT TOP_10_COUNT TOP_100_COUNT
+ENGINES ?= tantivy-0.25 lucene-10.3.0 lance-f03a2783c24f-mt lance-f03a2783c24f
 PORT ?= 8080
 WARMUP_TIME ?= 60
 
@@ -18,15 +17,24 @@ help:
 all: index
 
 corpus:
-	@echo "--- Downloading $(WIKI_SRC) ---"
+	@echo "--- Downloading $(WIKI_SRC) to $(CORPUS) ---"
+	@mkdir -p $(dir $(CORPUS))
 	@curl -# -L "$(WIKI_SRC)" | bunzip2 -c | python3 corpus_transform.py > $(CORPUS)
+
+prepare-idx:
+	@mkdir -p $(SBG_ROOT)/indexes
+	@for engine in $(ENGINES); do \
+		mkdir -p $(SBG_ROOT)/indexes/$$engine; \
+		rm -rf ${shell pwd}/engines/$$engine/idx; \
+		ln -sfn $(SBG_ROOT)/indexes/$$engine ${shell pwd}/engines/$$engine/idx; \
+	done
 
 clean:
 	@echo "--- Cleaning directories ---"
 	@rm -fr results
 	@for engine in $(ENGINES); do cd ${shell pwd}/engines/$$engine && make clean ; done
 
-index:
+index: prepare-idx
 	@echo "--- Indexing corpus ---"
 	@for engine in $(ENGINES); do cd ${shell pwd}/engines/$$engine && make index ; done
 
